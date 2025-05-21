@@ -1,0 +1,10 @@
+/* NProgress Çubuğu Özelleştirmesi */
+#nprogress .bar {
+    background: var(--primary-accent-color) !important;
+    height: 3px !important;
+    z-index: 99999 !important;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px var(--primary-accent-color), 0 0 5px var(--primary-accent-color) !important;
+}

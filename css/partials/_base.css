@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif; /* Varsayılan gövde fontu */
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    line-height: 1.7;
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6, .nav-logo, .btn, .filter-btn {
+    font-family: 'Poppins', sans-serif;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 0 20px;
+    overflow: auto;
+}
+
+/* Font Büyüklüğü Sınıfları (body'e eklenecek) */
+body.font-scale-small {
+    font-size: 87.5%; /* Yaklaşık 14px temel */
+}
+body.font-scale-normal {
+    font-size: 100%; /* Yaklaşık 16px temel (root html'dekiyle aynı) */
+}
+body.font-scale-large {
+    font-size: 112.5%; /* Yaklaşık 18px temel */
+}

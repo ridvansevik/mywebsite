@@ -1,0 +1,10 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* Import Partials */
+@import 'css/partials/_variables.css';
+@import 'css/partials/_base.css';
+@import 'css/partials/_components.css';
+@import 'css/partials/_sections.css';
+@import 'css/partials/_nprogress.css';
+@import 'css/partials/_responsive.css';

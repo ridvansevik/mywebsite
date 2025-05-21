@@ -1,0 +1,66 @@
+/* CSS Variables & Basic Reset - Neon Gecesi / Tech Fusion Teması */
+:root { /* Açık Mod Renkleri - Daha Enerjik ve Temiz */
+    --primary-bg-color: #ffffff;        /* Saf Beyaz */
+    --secondary-bg-color: #f7f9fc;      /* Çok Açık Gri-Mavi */
+    --tertiary-bg-color: #eef2f7;      /* Biraz Daha Koyu Açık Gri-Mavi */
+    --text-color: #34495e;              /* Koyu Kurşuni Mavi */
+    --heading-color: #2c3e50;           /* Çok Koyu Kurşuni Mavi */
+    --primary-accent-color: #3498db;    /* Açık mod için canlı mavi */
+    --secondary-accent-color: #2980b9;  /* Açık mod için biraz daha koyu canlı mavi */
+
+    --vibrant-accent-color: #e74c3c;    /* Parlak Kırmızı/Turuncu - Dikkat Çekici Vurgu */
+    --success-color: #2ecc71;           /* Başarı/Yeşil */
+
+    --border-color: #dce4ec;            /* Açık Gri Sınır */
+    --card-shadow: 0 5px 15px rgba(44, 62, 80, 0.1); /* Yumuşak Gölge */
+
+    --navbar-bg: #ffffff;               /* Beyaz Navbar */
+    --navbar-text: var(--heading-color);/* Navbar metni başlık rengiyle aynı */
+    --navbar-bg-scrolled: rgba(255, 255, 255, 0.95); /* Scroll'da hafif transparan beyaz */
+    --navbar-height: 70px;              /* Navbar Yüksekliği */
+
+    --footer-bg: #2c3e50;               /* Koyu Kurşuni Mavi Footer */
+    --footer-text: #ecf0f1;             /* Footer için Açık Gri */
+
+    --hero-text-color: var(--heading-color);
+    --button-text-color: #ffffff;
+    --skill-bullet-color: var(--success-color);
+
+    --filter-btn-text-color: var(--primary-accent-color);
+    --filter-btn-active-bg: var(--primary-accent-color);
+    --filter-btn-active-text: #ffffff;
+
+    font-size: 16px; /* Varsayılan temel font büyüklüğü (rem için) */
+}
+
+body.dark-mode { /* Koyu Mod Renkleri - Neon Gecesi */
+    --primary-bg-color: #0d1117;
+    --secondary-bg-color: #161b22;
+    --tertiary-bg-color: #0a0c10;
+    --text-color: #c9d1d9;
+    --heading-color: #ffffff;
+
+    --primary-accent-color: #58a6ff;
+    --secondary-accent-color: #1f6feb;
+
+    --vibrant-accent-color: #f778ba;
+    --success-color: #3fb950;
+
+    --border-color: #30363d;
+    --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+
+    --navbar-bg: #161b22;
+    --navbar-text: var(--text-color);
+    --navbar-bg-scrolled: rgba(22, 27, 34, 0.9);
+
+    --footer-bg: #0d1117;
+    --footer-text: #7d8590;
+
+    --hero-text-color: #ffffff;
+    --button-text-color: #ffffff;
+    --skill-bullet-color: var(--success-color);
+
+    --filter-btn-text-color: var(--primary-accent-color);
+    --filter-btn-active-bg: var(--primary-accent-color);
+    --filter-btn-active-text: var(--primary-bg-color);
+}
