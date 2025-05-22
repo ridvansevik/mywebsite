@@ -70,6 +70,82 @@ section h2 i {
     box-shadow: var(--card-shadow);
 }
 
+/* Currently Exploring Section */
+.currently-exploring-section {
+    background-color: var(--tertiary-bg-color); /* Mevcut renk paletinize uygun bir arka plan rengi */
+}
+
+/* Section başlığı için genel stiller zaten _sections.css içinde tanımlı olmalı,
+   eğer özel bir stil istersen buraya ekleyebilirsin.
+   .currently-exploring-section h2 {
+       color: var(--heading-color);
+   }
+   .currently-exploring-section h2 i {
+       color: var(--primary-accent-color);
+   }
+*/
+
+.current-status-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Kartların duyarlı dağılımı */
+    gap: 30px; /* Kartlar arası boşluk */
+    margin-top: 20px; /* Başlık ile içerik arası boşluk */
+}
+
+.status-item {
+    background: var(--secondary-bg-color); /* Kartların arka planı */
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: var(--card-shadow); /* Mevcut gölge değişkeni */
+    border-left: 4px solid var(--primary-accent-color); /* Sol kenarda vurgu çizgisi */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.status-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Hover'da daha belirgin gölge */
+}
+
+body.dark-mode .status-item:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+.status-item h3 {
+    font-size: 1.3rem; /* Kart başlık boyutu */
+    color: var(--secondary-accent-color); /* Başlık rengi */
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.status-item h3 i {
+    margin-right: 10px;
+    font-size: 1.2em; /* İkonun başlığa göre boyutu */
+    color: var(--primary-accent-color); /* İkon rengi */
+}
+
+.status-item ul {
+    list-style: none; /* Madde işareti olmasın */
+    padding-left: 5px; /* Hafif içten başlasın */
+}
+
+.status-item ul li {
+    margin-bottom: 10px; /* Maddeler arası boşluk */
+    padding-left: 25px; /* İkon için yer aç */
+    position: relative;
+    line-height: 1.7;
+}
+
+.status-item ul li::before {
+    content: "\f058"; /* Font Awesome 'check-circle' ikonu (veya \f054 for chevron-right) */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900; /* Solid ikonlar için */
+    position: absolute;
+    left: 0;
+    top: 3px; /* Dikey hizalama */
+    color: var(--success-color); /* Başarı/Yeşil rengi veya primary-accent-color */
+}
+
 /* Education Section */
 .education-section { background-color: var(--tertiary-bg-color); }
 .education-item {
