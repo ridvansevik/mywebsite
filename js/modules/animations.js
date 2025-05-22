@@ -1,8 +1,9 @@
 // js/modules/animations.js
 import { CLASS_DARK_MODE, PARTICLE_COUNT_DESKTOP, PARTICLE_COUNT_MOBILE, RESIZE_DEBOUNCE_MS } from './constants.js';
 
-// --- Text Typing Animation for Hero Section ---
-class TxtRotate {
+const activeTxtRotateInstances = new Map();
+
+export class TxtRotate {
     constructor(el, toRotate, period) {
         this.toRotate = toRotate;
         this.el = el;
@@ -10,10 +11,17 @@ class TxtRotate {
         this.period = parseInt(period, 10) || 2000;
         this.txt = '';
         this.isDeleting = false;
+        this.timeoutId = null;
+        // Elemanın içeriğini başlangıçta temizle, böylece eski "wrap" span'leri kalmaz.
+        this.el.innerHTML = '<span class="wrap"></span>';
         this.tick();
     }
 
     tick() {
+        if (!activeTxtRotateInstances.has(this.el) || activeTxtRotateInstances.get(this.el) !== this) {
+            return; // Bu örnek artık aktif değilse dur.
+        }
+
         const i = this.loopNum % this.toRotate.length;
         const fullTxt = this.toRotate[i];
 
@@ -22,11 +30,21 @@ class TxtRotate {
         } else {
             this.txt = fullTxt.substring(0, this.txt.length + 1);
         }
-
-        this.el.innerHTML = `<span class="wrap">${this.txt}</span>`;
-        let delta = 150 - Math.random() * 100;
-
-        if (this.isDeleting) delta /= 2;
+        
+        // .wrap span'ını bul ve içeriğini güncelle
+        const wrapSpan = this.el.querySelector('.wrap');
+        if (wrapSpan) {
+            wrapSpan.textContent = this.txt;
+        } else {
+            // Eğer .wrap span yoksa (beklenmedik bir durum), doğrudan elemanın içeriğini ayarla
+            // ancak bu, TxtRotate'in stilini bozabilir.
+            this.el.innerHTML = `<span class="wrap">${this.txt}</span>`;
+        }
+        
+        let delta = 200 - Math.random() * 100;
+        if (this.isDeleting) {
+            delta /= 2;
+        }
 
         if (!this.isDeleting && this.txt === fullTxt) {
             delta = this.period;
@@ -34,29 +52,54 @@ class TxtRotate {
         } else if (this.isDeleting && this.txt === '') {
             this.isDeleting = false;
             this.loopNum++;
-            delta = 300;
+            delta = 500;
         }
-        setTimeout(() => this.tick(), delta);
+        this.timeoutId = setTimeout(() => this.tick(), delta);
+    }
+
+    stop() {
+        if (this.timeoutId) {
+            clearTimeout(this.timeoutId);
+            this.timeoutId = null;
+        }
+        // İsteğe bağlı: Durdurulduğunda elemanın içeriğini temizleyebilirsiniz.
+        // if (this.el) this.el.innerHTML = '';
     }
 }
 
-export function initTxtRotate() {
-    const elements = document.querySelectorAll('.txt-rotate');
+export function initTxtRotate(specificElement = null) {
+    const elements = specificElement ? [specificElement] : document.querySelectorAll('.txt-rotate');
+    
     elements.forEach(el => {
+        if (activeTxtRotateInstances.has(el)) {
+            activeTxtRotateInstances.get(el).stop();
+            activeTxtRotateInstances.delete(el);
+        }
+
+        const toRotateData = el.getAttribute('data-rotate');
+        if (!toRotateData || toRotateData.trim() === "" || toRotateData.trim() === "[]") { // Boş veya geçersiz veri kontrolü
+            console.warn("TxtRotate: data-rotate attribute is missing or empty for element:", el);
+            el.innerHTML = ''; // Veri yoksa içeriği temizle
+            return;
+        }
+        
+        const period = el.getAttribute('data-period') || 2000;
+        
         try {
-            const toRotateData = el.getAttribute('data-rotate');
-            if (!toRotateData) return;
             const toRotate = JSON.parse(toRotateData);
-            const period = el.getAttribute('data-period');
             if (toRotate && toRotate.length > 0) {
-                new TxtRotate(el, toRotate, period);
+                const newInstance = new TxtRotate(el, toRotate, period);
+                activeTxtRotateInstances.set(el, newInstance);
+            } else {
+                console.warn("TxtRotate: Parsed data-rotate is empty for element:", el);
+                el.innerHTML = ''; // Boş dizi ise içeriği temizle
             }
         } catch (error) {
-            console.error("Error initializing TxtRotate for element:", el, error);
+            console.error("Error initializing TxtRotate for element:", el, ". Data:", toRotateData, "Error:", error);
+            el.innerHTML = ''; // Hata durumunda içeriği temizle
         }
     });
 }
-
 
 // --- Basic Hero Canvas Animation ---
 let animationFrameId = null; // Keep track of animation frame

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rıdvan Şevik - Computer Engineering Student</title>
+    <title data-translate-key="siteTitle">Rıdvan Şevik - Computer Engineering Student</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -16,17 +15,22 @@
             <div class="container">
                 <a href="index.html" class="nav-logo">Rıdvan Şevik</a>
                 <ul class="nav-menu">
-                    <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                     <li class="nav-item"><a href="#currently-exploring" class="nav-link">Exploring</a></li> 
-                    <li class="nav-item"><a href="#education" class="nav-link">Education</a></li>
-                    <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
-                    <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
-                    <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+                    <li class="nav-item"><a href="#home" class="nav-link" data-translate-key="navHome">Home</a></li>
+                    <li class="nav-item"><a href="#about" class="nav-link" data-translate-key="navAbout">About</a></li>
+                    <li class="nav-item"><a href="#currently-exploring" class="nav-link" data-translate-key="navExploring">Exploring</a></li>
+                    <li class="nav-item"><a href="#education" class="nav-link" data-translate-key="navEducation">Education</a></li>
+                    <li class="nav-item"><a href="#skills" class="nav-link" data-translate-key="navSkills">Skills</a></li>
+                    <li class="nav-item"><a href="#projects" class="nav-link" data-translate-key="navProjects">Projects</a></li>
+                    <li class="nav-item"><a href="#contact" class="nav-link" data-translate-key="navContact">Contact</a></li>
                     <li class="nav-item">
-                        <button id="theme-toggle" title="Toggle theme">
+                        <button id="theme-toggle" data-translate-key-title="themeToggleTitle" title="Toggle theme">
                             <i class="fas fa-moon"></i>
                         </button>
+                    </li>
+                    <li class="nav-item lang-switcher">
+                        <button id="lang-en" data-lang="en" class="lang-btn" data-translate-key-title="langSwitcherToEn" title="Switch to English">EN</button>
+                        <span class="lang-separator" style="color: var(--navbar-text); margin: 0 5px;">|</span>
+                        <button id="lang-tr" data-lang="tr" class="lang-btn" data-translate-key-title="langSwitcherToTr" title="Switch to Turkish">TR</button>
                     </li>
                 </ul>
                 <div class="hamburger">
@@ -42,25 +46,27 @@
         <section id="home" class="hero-section">
             <canvas id="heroCanvas"></canvas>
             <div class="container">
-            <h1>Hello, I'm Rıdvan Şevik</h1>
+            <h1 data-translate-key="heroGreeting">Hello, I'm Rıdvan Şevik</h1>
             <p class="subtitle">
-                A 3rd Year Computer Engineering Student |
-                <span class="txt-rotate" data-period="2000" data-rotate='[ "Developer.", "Student.", "Creative." ]'></span>
+                <span data-translate-key="heroSubtitleStatic">A 3rd Year Computer Engineering Student</span> |
+                <span class="txt-rotate" data-period="2000" data-translate-key-rotate="heroSubtitleRotate" data-rotate='[ "Developer.", "Student.", "Creative." ]'></span>
             </p>
-            <a href="#projects" class="btn btn-primary">View My Projects</a>
-            <a href="/RIDVANSEVIKRESUME2025.pdf" download="Ridvan_Sevik_CV.pdf" class="btn btn-secondary">Download CV <i class="fas fa-download"></i></a>
+            <a href="#projects" class="btn btn-primary" data-translate-key="viewProjectsBtn">View My Projects</a>
+            <a href="/RIDVANSEVIKRESUME2025.pdf" download="Ridvan_Sevik_CV.pdf" class="btn btn-secondary">
+                <span data-translate-key="downloadCVBtn">Download CV</span> <i class="fas fa-download"></i>
+            </a>
             </div>
         </section>
 
         <section id="about" class="about-section" data-aos="fade-up">
             <div class="container">
-                <h2><i class="fas fa-user"></i> About Me</h2>
+                <h2><i class="fas fa-user"></i> <span data-translate-key="aboutMeTitle">About Me</span></h2>
                 <div class="about-content">
                     <div class="about-text">
-                        <p>
+                        <p data-translate-key="aboutMeP1">
                             I am a 3rd year computer engineer student in Rize. I really like coding.
                         </p>
-                        <p>
+                        <p data-translate-key="aboutMeP2">
                             Outside of academics, I enjoy chess, playing computer games and volleyball.
                         </p>
                     </div>
@@ -73,31 +79,31 @@
 
         <section id="currently-exploring" class="currently-exploring-section" data-aos="fade-up">
             <div class="container">
-                <h2><i class="fas fa-compass-drafting"></i> What I Am Currently Exploring / Learning</h2>
+                <h2><i class="fas fa-compass-drafting"></i> <span data-translate-key="exploringTitle">What I Am Currently Exploring / Learning</span></h2>
                 <div class="current-status-content">
                     <div class="status-item">
-                        <h3><i class="fas fa-laptop-code"></i> Working on</h3>
+                        <h3><i class="fas fa-laptop-code"></i> <span data-translate-key="exploringWorkingOn">Working on</span></h3>
                         <ul>
-                            <li>Improving this website's UI and performance.</li>
-                            <li>Developing full-stack applications with React, Node.js, and PostgreSQL.</li>
-                            <li>Building IoT projects using ESP32-S3 (voice assistant).</li>
+                            <li data-translate-key="exploringWorkingOnItem1">Improving this website's UI and performance.</li>
+                            <li data-translate-key="exploringWorkingOnItem2">Developing full-stack applications with React, Node.js, and PostgreSQL.</li>
+                            <li data-translate-key="exploringWorkingOnItem3">Building IoT projects using ESP32-S3 (voice assistant).</li>
                         </ul>
                     </div>
                     <div class="status-item">
-                        <h3><i class="fas fa-book-open"></i> Currently Learning</h3>
+                        <h3><i class="fas fa-book-open"></i> <span data-translate-key="exploringLearning">Currently Learning</span></h3>
                         <ul>
-                            <li>Embedded systems programming with ESP32.</li>
-                            <li>Machine learning on microcontrollers (TensorFlow Lite for Microcontrollers).</li>
-                            <li>Data visualization with R (ggplot2, Shiny, tidyverse).</li>
-                            <li>Linux and system programming (Bash scripting, C).</li>
+                            <li data-translate-key="exploringLearningItem1">Embedded systems programming with ESP32.</li>
+                            <li data-translate-key="exploringLearningItem2">Machine learning on microcontrollers (TensorFlow Lite for Microcontrollers).</li>
+                            <li data-translate-key="exploringLearningItem3">Data visualization with R (ggplot2, Shiny, tidyverse).</li>
+                            <li data-translate-key="exploringLearningItem4">Linux and system programming (Bash scripting, C).</li>
                         </ul>
                     </div>
                     <div class="status-item">
-                        <h3><i class="fas fa-lightbulb"></i> Future Plans / Curious About</h3>
+                        <h3><i class="fas fa-lightbulb"></i> <span data-translate-key="exploringFuture">Future Plans / Curious About</span></h3>
                         <ul>
-                            <li>Game development with Godot (2D games, character control, shooting mechanics).</li>
-                            <li>Advanced web animations and UI/UX design principles.</li>
-                            <li>Developing a project with React</li>
+                            <li data-translate-key="exploringFutureItem1">Game development with Godot (2D games, character control, shooting mechanics).</li>
+                            <li data-translate-key="exploringFutureItem2">Advanced web animations and UI/UX design principles.</li>
+                            <li data-translate-key="exploringFutureItem3">Developing a project with React</li>
                         </ul>
                     </div>
                 </div>
@@ -106,57 +112,57 @@
 
         <section id="education" class="education-section" data-aos="fade-up">
             <div class="container">
-                <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                <h2><i class="fas fa-graduation-cap"></i> <span data-translate-key="educationTitle">Education</span></h2>
                 <div class="education-item">
-                    <h3>Recep Tayyip Erdoğan University</h3>
-                    <p><strong>Degree:</strong> Bachelor of Science in Computer Engineering</p>
-                    <p><strong>Status:</strong> 3rd Year Student</p>
-                    <p><strong>Expected Graduation:</strong> 2026</p>
-                    <p><strong>Relevant Coursework:</strong> Data Structures, Algorithms, Object-Oriented Programming, Database Systems, Web Development, Internet Of Things.</p>
+                    <h3 data-translate-key="educationUniName">Recep Tayyip Erdoğan University</h3>
+                    <p><strong><span data-translate-key="educationDegreeLabel">Degree:</span></strong> <span data-translate-key="educationDegreeValue">Bachelor of Science in Computer Engineering</span></p>
+                    <p><strong><span data-translate-key="educationStatusLabel">Status:</span></strong> <span data-translate-key="educationStatusValue">3rd Year Student</span></p>
+                    <p><strong><span data-translate-key="educationExpectedGradLabel">Expected Graduation:</span></strong> <span data-translate-key="educationExpectedGradValue">2026</span></p>
+                    <p><strong><span data-translate-key="educationCourseworkLabel">Relevant Coursework:</span></strong> <span data-translate-key="educationCourseworkValue">Data Structures, Algorithms, Object-Oriented Programming, Database Systems, Web Development, Internet Of Things.</span></p>
                 </div>
-                </div>
+            </div>
         </section>
 
         <section id="skills" class="skills-section" data-aos="fade-up">
             <div class="container">
-                <h2><i class="fas fa-cogs"></i> Skills</h2>
+                <h2><i class="fas fa-cogs"></i> <span data-translate-key="skillsTitle">Skills</span></h2>
                 <div class="skills-grid">
                     <div class="skill-category">
-                        <h3>Programming Languages</h3>
+                        <h3 data-translate-key="skillsCatProgLang">Programming Languages</h3>
                         <ul>
-                            <li>Java <span class="skill-level">(Proficient)</span></li>
-                            <li>Python <span class="skill-level">(Proficient)</span></li>
-                            <li>C++ <span class="skill-level">(Intermediate)</span></li>
-                            <li>JavaScript <span class="skill-level">(Intermediate)</span></li>
-                            <li>HTML5 & CSS3 <span class="skill-level">(Intermediate)</span></li>
+                            <li><span data-translate-key="skillsJava">Java</span> <span class="skill-level" data-translate-key="skillsLevelProficient">(Proficient)</span></li>
+                            <li><span data-translate-key="skillsPython">Python</span> <span class="skill-level" data-translate-key="skillsLevelProficient">(Proficient)</span></li>
+                            <li><span data-translate-key="skillsCpp">C++</span> <span class="skill-level" data-translate-key="skillsLevelIntermediate">(Intermediate)</span></li>
+                            <li><span data-translate-key="skillsJavaScript">JavaScript</span> <span class="skill-level" data-translate-key="skillsLevelIntermediate">(Intermediate)</span></li>
+                            <li><span data-translate-key="skillsHtmlCss">HTML5 & CSS3</span> <span class="skill-level" data-translate-key="skillsLevelIntermediate">(Intermediate)</span></li>
                         </ul>
                     </div>
                     <div class="skill-category">
-                        <h3>Frameworks & Libraries</h3>
+                        <h3 data-translate-key="skillsCatFrameworks">Frameworks & Libraries</h3>
                         <ul>
-                            <li>React <span class="skill-level">(Learning)</span></li>
-                            <li>Node.js <span class="skill-level">(Learning)</span></li>
-                            <li>Spring Boot <span class="skill-level">(Learning)</span></li>
+                            <li><span data-translate-key="skillsReact">React</span> <span class="skill-level" data-translate-key="skillsLevelLearning">(Learning)</span></li>
+                            <li><span data-translate-key="skillsNodeJs">Node.js</span> <span class="skill-level" data-translate-key="skillsLevelLearning">(Learning)</span></li>
+                            <li><span data-translate-key="skillsSpringBoot">Spring Boot</span> <span class="skill-level" data-translate-key="skillsLevelLearning">(Learning)</span></li>
                         </ul>
                     </div>
                     <div class="skill-category">
-                        <h3>Tools & Technologies</h3>
+                        <h3 data-translate-key="skillsCatTools">Tools & Technologies</h3>
                         <ul>
-                            <li>Git & GitHub</li>
-                            <li>VS Code</li>
-                            <li>IntelliJ IDEA</li>
-                            <li>Visual Studio Community Edition</li>
-                            <li>Eclipse</li>
-                            <li>Blender <span class="skill-level">(Learning)</span></li>
-                            <li>Linux</li>
+                            <li data-translate-key="skillsGitGitHub">Git & GitHub</li>
+                            <li data-translate-key="skillsVSCode">VS Code</li>
+                            <li data-translate-key="skillsIntelliJ">IntelliJ IDEA</li>
+                            <li data-translate-key="skillsVisualStudio">Visual Studio Community Edition</li>
+                            <li data-translate-key="skillsEclipse">Eclipse</li>
+                            <li><span data-translate-key="skillsBlender">Blender</span> <span class="skill-level" data-translate-key="skillsLevelLearning">(Learning)</span></li>
+                            <li data-translate-key="skillsLinux">Linux</li>
                         </ul>
                     </div>
                     <div class="skill-category">
-                        <h3>Databases</h3>
+                        <h3 data-translate-key="skillsCatDatabases">Databases</h3>
                         <ul>
-                            <li>Sqlite3</li>
-                            <li>MySQL</li>
-                            <li>MongoDB <span class="skill-level">(Basic)</span></li>
+                            <li data-translate-key="skillsSqlite3">Sqlite3</li>
+                            <li data-translate-key="skillsMySQL">MySQL</li>
+                            <li><span data-translate-key="skillsMongoDB">MongoDB</span> <span class="skill-level" data-translate-key="skillsLevelBasic">(Basic)</span></li>
                         </ul>
                     </div>
                 </div>
@@ -165,26 +171,26 @@
 
         <section id="projects" class="projects-section" data-aos="fade-up">
             <div class="container">
-                <h2><i class="fas fa-project-diagram"></i> My Projects</h2>
+                <h2><i class="fas fa-project-diagram"></i> <span data-translate-key="projectsTitle">My Projects</span></h2>
                 <div class="projects-grid">
                     <div class="project-card" data-aos="zoom-in" data-category="Python Scraping">
                         <img src="https://cdn.discordapp.com/attachments/1034865329383407678/1374828748578488320/image.png?ex=682f788c&is=682e270c&hm=0e8c68562d70d75710e6c8025856e246ddb1bd2cbcde668f24e51098eca4766b&" alt="ArabamComScraping">
-                        <h3>ArabamCom Scraping</h3>
-                        <p>You can scrape the ArabamCom website for cars. Educational demo using publicly available data (not for commercial use).</p>
-                        <p><strong>Technologies:</strong> Python, Selenium</p>
+                        <h3 data-translate-key="projectArabamComTitle">ArabamCom Scraping</h3>
+                        <p data-translate-key="projectArabamComDesc">You can scrape the ArabamCom website for cars. Educational demo using publicly available data (not for commercial use).</p>
+                        <p><strong><span data-translate-key="projectArabamComTechLabel">Technologies:</span></strong> <span data-translate-key="projectArabamComTechValue">Python, Selenium</span></p>
                             <div class="github-stats">
-                            </div>
+                                </div>
                         <div class="project-links">
-                            <a href="https://github.com/ridvansevik/arabam-com-scraper" target="_blank" rel="noopener noreferrer" class="btn-link">View Code <i class="fab fa-github"></i></a>
+                            <a href="https://github.com/ridvansevik/arabam-com-scraper" target="_blank" rel="noopener noreferrer" class="btn-link"><span data-translate-key="viewCodeBtn">View Code</span> <i class="fab fa-github"></i></a>
                         </div>
                     </div>
                     <div class="project-card" data-aos="zoom-in" data-category="Esp32 Voice Assistant">
                         <img src="https://cdn.discordapp.com/attachments/1034865329383407678/1374829003252301914/image.png?ex=682f78c9&is=682e2749&hm=9eaac63b18eb7967ba4f6476f40360a1f3f08dd4fb64c5abee6432e1618c2f3d&" alt="Voice Assistant With Esp32">
-                        <h3>Voice Assistant With Esp32</h3>
-                        <p>Its a project for the kitchen also you can chat with it.</p>
-                        <p><strong>Technologies:</strong> Arduino, Python</p>
+                        <h3 data-translate-key="projectVoiceAssistantTitle">Voice Assistant With Esp32</h3>
+                        <p data-translate-key="projectVoiceAssistantDesc">Its a project for the kitchen also you can chat with it.</p>
+                        <p><strong><span data-translate-key="projectVoiceAssistantTechLabel">Technologies:</span></strong> <span data-translate-key="projectVoiceAssistantTechValue">Arduino, Python</span></p>
                         <div class="project-links">
-                            <a href="https://github.com/ridvansevik/Esp32-LLM-Python" target="_blank" rel="noopener noreferrer" class="btn-link">View Code <i class="fab fa-github"></i></a>
+                            <a href="https://github.com/ridvansevik/Esp32-LLM-Python" target="_blank" rel="noopener noreferrer" class="btn-link"><span data-translate-key="viewCodeBtn">View Code</span> <i class="fab fa-github"></i></a>
                         </div>
                     </div>
                 </div>
@@ -193,26 +199,26 @@
 
         <section id="contact" class="contact-section" data-aos="fade-up">
             <div class="container">
-                <h2><i class="fas fa-envelope"></i> Get In Touch</h2>
-                <p class="contact-intro">Feel free to reach out to me for collaborations, opportunities, or just a friendly chat!</p>
+                <h2><i class="fas fa-envelope"></i> <span data-translate-key="getInTouchTitle">Get In Touch</span></h2>
+                <p class="contact-intro" data-translate-key="contactIntro">Feel free to reach out to me for collaborations, opportunities, or just a friendly chat!</p>
                 <form id="contact-form">
                     <div class="form-group">
-                        <label for="name">Name:</label>
+                        <label for="name" data-translate-key="formNameLabel">Name:</label>
                         <input type="text" id="name" name="name" required autocomplete="name">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email:</label>
+                        <label for="email" data-translate-key="formEmailLabel">Email:</label>
                         <input type="email" id="email" name="email" required autocomplete="email">
                     </div>
                     <div class="form-group">
-                        <label for="message">Message:</label>
+                        <label for="message" data-translate-key="formMessageLabel">Message:</label>
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
+                    <button type="submit" class="btn btn-primary" data-translate-key="sendMsgBtn">Send Message</button>
                 </form>
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/in/r%C4%B1dvan-%C5%9Fevik-460034252/" target="_blank" rel="noopener noreferrer" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/ridvansevik" target="_blank" rel="noopener noreferrer" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/r%C4%B1dvan-%C5%9Fevik-460034252/" target="_blank" rel="noopener noreferrer" data-translate-key-title="socialLinkedInTitle" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/ridvansevik" target="_blank" rel="noopener noreferrer" data-translate-key-title="socialGitHubTitle" title="GitHub"><i class="fab fa-github"></i></a>
                 </div>
             </div>
         </section>
@@ -220,49 +226,48 @@
 
     <footer>
         <div class="container">
-            <p>&copy; <span id="current-year"></span> Rıdvan Şevik. All Rights Reserved.</p>
-            <p>3rd Year Computer Engineering Student</p>
-        </div>
-        <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+            <p>
+                <span data-translate-key="footerCopyright"></span><span data-translate-key="footerAllRightsReserved"></span></p>
+            <p data-translate-key="footerStudentDesc"></p></div>
+        <button id="scrollToTopBtn" data-translate-key-title="scrollToTopTitle" title="Go to top"><i class="fas fa-arrow-up"></i></button>
     </footer>
 
-    <div id="command-palette" class="command-palette-overlay" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="command-palette-label">
+    <div id="command-palette" class="command-palette-overlay" style="display: none;" role="dialog" aria-modal="true" data-translate-key-aria-label="cmdPaletteLabel" aria-labelledby="command-palette-label-display">
         <div class="command-palette-modal">
-            <label id="command-palette-label" class="sr-only">Command Palette</label>
-            <input type="text" id="command-input" placeholder="Type a command or search... (e.g., 'about', 'dark mode')" aria-label="Command input">
+            <label id="command-palette-label-display" class="sr-only" data-translate-key="cmdPaletteLabel">Command Palette</label> <input type="text" id="command-input" data-translate-key-placeholder="cmdPaletteInputPlaceholder" placeholder="Type a command or search... (e.g., 'about', 'dark mode')" aria-label="Command input">
             <ul id="command-results" role="listbox">
             </ul>
         </div>
     </div>
 
-    <button id="settings-trigger-btn" class="settings-panel-trigger" title="Site Ayarları" aria-haspopup="true" aria-controls="settings-panel" aria-expanded="false">
+    <button id="settings-trigger-btn" class="settings-panel-trigger" data-translate-key-title="settingsTriggerTitle" title="Site Ayarları" aria-haspopup="true" aria-controls="settings-panel" aria-expanded="false">
         <i class="fas fa-cog"></i>
     </button>
 
-    <div id="settings-panel" class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-panel-title">
+    <div id="settings-panel" class="settings-panel" role="dialog" aria-modal="true" aria-labelledby="settings-panel-title-display">
         <div class="settings-panel-header">
-            <h3 id="settings-panel-title">Site Ayarları</h3>
-            <button id="settings-close-btn" class="settings-panel-close" title="Kapat" aria-label="Close settings panel">&times;</button>
+            <h3 id="settings-panel-title-display" data-translate-key="settingsPanelTitle">Site Ayarları</h3>
+            <button id="settings-close-btn" class="settings-panel-close" data-translate-key-title="settingsPanelCloseBtn" title="Kapat" data-translate-key-aria-label="settingsPanelCloseBtn" aria-label="Close settings panel">&times;</button>
         </div>
         <div class="settings-panel-content">
             <div class="setting-option">
-                <h4>Ana Vurgu Rengi</h4>
-                <div id="accent-color-options" class="color-options" role="radiogroup" aria-labelledby="accent-color-label">
-                     <span id="accent-color-label" class="sr-only">Accent Color Options</span>
-                    <button class="color-swatch" data-color-theme="default" style="background-color: #58a6ff;" title="Neon Mavi (Varsayılan)" aria-label="Neon Mavi" role="radio" aria-checked="true"></button>
-                    <button class="color-swatch" data-color-theme="green" style="background-color: #3fb950;" title="Neon Yeşil" aria-label="Neon Yeşil" role="radio" aria-checked="false"></button>
-                    <button class="color-swatch" data-color-theme="pink" style="background-color: #f778ba;" title="Neon Pembe" aria-label="Neon Pembe" role="radio" aria-checked="false"></button>
-                    <button class="color-swatch" data-color-theme="orange" style="background-color: #ff9f43;" title="Canlı Turuncu" aria-label="Canlı Turuncu" role="radio" aria-checked="false"></button>
+                <h4 data-translate-key="settingsAccentColor">Ana Vurgu Rengi</h4>
+                <div id="accent-color-options" class="color-options" role="radiogroup" aria-labelledby="accent-color-label-display">
+                     <span id="accent-color-label-display" class="sr-only" data-translate-key="settingsAccentColor">Accent Color Options</span>
+                    <button class="color-swatch" data-color-theme="default" style="background-color: #58a6ff;" data-translate-key-title="settingsColorNeonBlue" title="Neon Mavi (Varsayılan)" aria-label="Neon Mavi" role="radio" aria-checked="true"></button>
+                    <button class="color-swatch" data-color-theme="green" style="background-color: #3fb950;" data-translate-key-title="settingsColorNeonGreen" title="Neon Yeşil" aria-label="Neon Yeşil" role="radio" aria-checked="false"></button>
+                    <button class="color-swatch" data-color-theme="pink" style="background-color: #f778ba;" data-translate-key-title="settingsColorNeonPink" title="Neon Pembe" aria-label="Neon Pembe" role="radio" aria-checked="false"></button>
+                    <button class="color-swatch" data-color-theme="orange" style="background-color: #ff9f43;" data-translate-key-title="settingsColorVibrantOrange" title="Canlı Turuncu" aria-label="Canlı Turuncu" role="radio" aria-checked="false"></button>
                 </div>
             </div>
 
             <div class="setting-option">
-                <h4>Font Büyüklüğü</h4>
-                <div id="font-size-options" class="font-size-controls" role="group" aria-labelledby="font-size-label">
-                    <span id="font-size-label" class="sr-only">Font Size Options</span>
-                    <button class="font-size-btn" data-size="small">Küçük</button>
-                    <button class="font-size-btn" data-size="normal">Normal</button>
-                    <button class="font-size-btn" data-size="large">Büyük</button>
+                <h4 data-translate-key="settingsFontSize">Font Büyüklüğü</h4>
+                <div id="font-size-options" class="font-size-controls" role="group" aria-labelledby="font-size-label-display">
+                    <span id="font-size-label-display" class="sr-only" data-translate-key="settingsFontSize">Font Size Options</span>
+                    <button class="font-size-btn" data-size="small" data-translate-key="settingsFontSmall">Küçük</button>
+                    <button class="font-size-btn" data-size="normal" data-translate-key="settingsFontNormal">Normal</button>
+                    <button class="font-size-btn" data-size="large" data-translate-key="settingsFontLarge">Büyük</button>
                 </div>
             </div>
         </div>

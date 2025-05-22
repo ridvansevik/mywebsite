@@ -1,117 +1,144 @@
 // js/modules/commandPalette.js
 import { CLASS_ACTIVE, CLASS_SELECTED, CMD_PALETTE_TRANSITION_MS } from './constants.js';
+import { getTranslation } from './languageManager.js'; // Import getTranslation
 
-export function initCommandPalette() {
-    const commandPaletteOverlay = document.getElementById('command-palette');
-    const commandInput = document.getElementById('command-input');
-    const commandResultsList = document.getElementById('command-results');
-    const themeToggleBtn = document.getElementById('theme-toggle'); // For 'Toggle Theme' command
+let commandPaletteOverlay, commandInput, commandResultsList, themeToggleBtn;
+let selectedCommandIndex = -1;
+let currentFilteredCommands = [];
+let allCommands = []; // Store base command structure
 
-    let selectedCommandIndex = -1;
-    let currentFilteredCommands = [];
-
-    const commands = [
-        { name: 'Go to Home', action: '#home', description: 'Navigate to Home section' },
-        { name: 'Go to About', action: '#about', description: 'Navigate to About Me' },
-        { name: 'Go to Education', action: '#education', description: 'Navigate to Education' },
-        { name: 'Go to Skills', action: '#skills', description: 'Navigate to Skills' },
-        { name: 'Go to Projects', action: '#projects', description: 'Navigate to Projects' },
-        { name: 'Go to Contact', action: '#contact', description: 'Navigate to Contact form' },
-        { name: 'Toggle Theme', action: function() { if (themeToggleBtn) themeToggleBtn.click(); }, description: 'Switch light/dark theme' }
+function generateCommandsStructure() {
+    // Define command structure with keys for translation
+    return [
+        { id: 'NavHome', nameKey: 'cmdNavHomeName', descriptionKey: 'cmdNavHomeDesc', action: '#home' },
+        { id: 'NavAbout', nameKey: 'cmdNavAboutName', descriptionKey: 'cmdNavAboutDesc', action: '#about' },
+        { id: 'NavEducation', nameKey: 'cmdNavEducationName', descriptionKey: 'cmdNavEducationDesc', action: '#education' },
+        { id: 'NavSkills', nameKey: 'cmdNavSkillsName', descriptionKey: 'cmdNavSkillsDesc', action: '#skills' },
+        { id: 'NavProjects', nameKey: 'cmdNavProjectsName', descriptionKey: 'cmdNavProjectsDesc', action: '#projects' },
+        { id: 'NavContact', nameKey: 'cmdNavContactName', descriptionKey: 'cmdNavContactDesc', action: '#contact' },
+        { id: 'ToggleTheme', nameKey: 'cmdToggleThemeName', descriptionKey: 'cmdToggleThemeDesc', action: function() { if (themeToggleBtn) themeToggleBtn.click(); } }
     ];
+}
 
-    function openCommandPalette() {
-        if (commandPaletteOverlay) {
-            commandPaletteOverlay.classList.add(CLASS_ACTIVE);
-            commandPaletteOverlay.style.display = 'flex';
-            if (commandInput) commandInput.value = '';
-            renderCommandResults('');
-            if (commandInput) commandInput.focus();
-            selectedCommandIndex = -1;
-        }
+function populateTranslatedCommands() {
+    const commandStructure = generateCommandsStructure();
+    allCommands = commandStructure.map(cmd => ({
+        ...cmd, // Keep original action and id
+        name: getTranslation(cmd.nameKey),
+        description: getTranslation(cmd.descriptionKey)
+    }));
+}
+
+// This function will be exposed to be called by languageManager on language change
+window.refreshCommandPaletteCommands = () => {
+    populateTranslatedCommands();
+    if (commandPaletteOverlay && commandPaletteOverlay.classList.contains(CLASS_ACTIVE) && commandInput) {
+        renderCommandResults(commandInput.value); // Re-render if open
     }
+};
 
-    function closeCommandPalette() {
-        if (commandPaletteOverlay) {
-            commandPaletteOverlay.classList.remove(CLASS_ACTIVE);
-            setTimeout(() => {
-                if (!commandPaletteOverlay.classList.contains(CLASS_ACTIVE)) {
-                    commandPaletteOverlay.style.display = 'none';
-                }
-            }, CMD_PALETTE_TRANSITION_MS);
+function openCommandPalette() {
+    if (commandPaletteOverlay) {
+        populateTranslatedCommands(); // Ensure commands are translated on open
+        commandPaletteOverlay.classList.add(CLASS_ACTIVE);
+        commandPaletteOverlay.style.display = 'flex';
+        if (commandInput) {
+            commandInput.value = '';
+            commandInput.setAttribute('placeholder', getTranslation('cmdPaletteInputPlaceholder'));
         }
-    }
-
-    function renderCommandResults(query) {
-        if (!commandResultsList) return;
-        commandResultsList.innerHTML = '';
-        currentFilteredCommands = commands.filter(command =>
-            command.name.toLowerCase().includes(query.toLowerCase()) ||
-            (command.description && command.description.toLowerCase().includes(query.toLowerCase()))
-        );
-
-        if (currentFilteredCommands.length === 0) {
-            const li = document.createElement('li');
-            li.textContent = 'No commands found.';
-            li.classList.add('no-results');
-            commandResultsList.appendChild(li);
-        } else {
-            currentFilteredCommands.forEach((command) => {
-                const li = document.createElement('li');
-                li.setAttribute('role', 'option');
-                li.textContent = command.name;
-                if (command.description) {
-                    const descSpan = document.createElement('span');
-                    descSpan.className = 'command-description';
-                    descSpan.textContent = ` (${command.description})`;
-                    li.appendChild(descSpan);
-                }
-                li.addEventListener('click', () => executeCommand(command));
-                commandResultsList.appendChild(li);
-            });
-        }
+        renderCommandResults('');
+        if (commandInput) commandInput.focus();
         selectedCommandIndex = -1;
-        updateSelectedCommandHighlight();
     }
+}
 
-    function updateSelectedCommandHighlight() {
-        if (!commandResultsList) return;
-        const items = commandResultsList.querySelectorAll('li');
-        items.forEach((item, index) => {
-            if (index === selectedCommandIndex && !item.classList.contains('no-results')) {
-                item.classList.add(CLASS_SELECTED);
-                item.setAttribute('aria-selected', 'true');
-                item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-            } else {
-                item.classList.remove(CLASS_SELECTED);
-                item.setAttribute('aria-selected', 'false');
+function closeCommandPalette() {
+    if (commandPaletteOverlay) {
+        commandPaletteOverlay.classList.remove(CLASS_ACTIVE);
+        setTimeout(() => {
+            if (!commandPaletteOverlay.classList.contains(CLASS_ACTIVE)) {
+                commandPaletteOverlay.style.display = 'none';
             }
+        }, CMD_PALETTE_TRANSITION_MS);
+    }
+}
+
+function renderCommandResults(query) {
+    if (!commandResultsList) return;
+    commandResultsList.innerHTML = '';
+    currentFilteredCommands = allCommands.filter(command =>
+        command.name.toLowerCase().includes(query.toLowerCase()) ||
+        (command.description && command.description.toLowerCase().includes(query.toLowerCase()))
+    );
+
+    if (currentFilteredCommands.length === 0) {
+        const li = document.createElement('li');
+        li.textContent = getTranslation('cmdNoResults');
+        li.classList.add('no-results');
+        commandResultsList.appendChild(li);
+    } else {
+        currentFilteredCommands.forEach((command) => {
+            const li = document.createElement('li');
+            li.setAttribute('role', 'option');
+            li.textContent = command.name;
+            if (command.description && command.description !== command.descriptionKey) { // Show if translation exists
+                const descSpan = document.createElement('span');
+                descSpan.className = 'command-description';
+                descSpan.textContent = ` (${command.description})`;
+                li.appendChild(descSpan);
+            }
+            li.addEventListener('click', () => executeCommand(command)); // Pass the translated command object
+            commandResultsList.appendChild(li);
         });
     }
+    selectedCommandIndex = -1; // Reset selection
+    updateSelectedCommandHighlight();
+}
 
-    function executeCommand(command) {
-        if (typeof command.action === 'function') {
-            command.action();
-        } else if (typeof command.action === 'string' && command.action.startsWith('#')) {
-            const targetElement = document.querySelector(command.action);
-            if (targetElement) {
-                const hamburger = document.querySelector(".hamburger"); // Consider passing or importing
-                const navMenu = document.querySelector(".nav-menu");   // Consider passing or importing
-                if (hamburger && navMenu && hamburger.classList.contains(CLASS_ACTIVE)) {
-                    hamburger.classList.remove(CLASS_ACTIVE);
-                    navMenu.classList.remove(CLASS_ACTIVE);
-                }
-                // Use smooth scroll logic from uiInteractions for consistency if desired
-                // For simplicity here, direct scrollIntoView
-                const navbar = document.querySelector(".navbar");
-                let navbarHeight = navbar ? navbar.offsetHeight : 0;
-                const elementPosition = targetElement.offsetTop;
-                const offsetPosition = elementPosition - navbarHeight - 15; // Consistent offset
-                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-            }
+function updateSelectedCommandHighlight() {
+    if (!commandResultsList) return;
+    const items = commandResultsList.querySelectorAll('li');
+    items.forEach((item, index) => {
+        if (index === selectedCommandIndex && !item.classList.contains('no-results')) {
+            item.classList.add(CLASS_SELECTED);
+            item.setAttribute('aria-selected', 'true');
+            item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        } else {
+            item.classList.remove(CLASS_SELECTED);
+            item.setAttribute('aria-selected', 'false');
         }
-        closeCommandPalette();
+    });
+}
+
+function executeCommand(command) { // command is the translated command object
+    if (typeof command.action === 'function') {
+        command.action();
+    } else if (typeof command.action === 'string' && command.action.startsWith('#')) {
+        const targetElement = document.querySelector(command.action);
+        if (targetElement) {
+            const hamburger = document.querySelector(".hamburger");
+            const navMenu = document.querySelector(".nav-menu");
+            if (hamburger && navMenu && hamburger.classList.contains(CLASS_ACTIVE)) {
+                hamburger.classList.remove(CLASS_ACTIVE);
+                navMenu.classList.remove(CLASS_ACTIVE);
+            }
+            const navbar = document.querySelector(".navbar");
+            let navbarHeight = navbar ? navbar.offsetHeight : 0;
+            const elementPosition = targetElement.offsetTop;
+            const offsetPosition = elementPosition - navbarHeight - 15;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
     }
+    closeCommandPalette();
+}
+
+export function initCommandPalette() {
+    commandPaletteOverlay = document.getElementById('command-palette');
+    commandInput = document.getElementById('command-input');
+    commandResultsList = document.getElementById('command-results');
+    themeToggleBtn = document.getElementById('theme-toggle');
+
+    populateTranslatedCommands(); // Initial population
 
     if (commandInput) {
         commandInput.addEventListener('input', (e) => renderCommandResults(e.target.value));
@@ -130,6 +157,8 @@ export function initCommandPalette() {
             if (e.key === 'Escape') {
                 closeCommandPalette();
             }
+            // Arrow navigation and Enter key logic remains largely the same
+            // Ensure currentFilteredCommands is used for execution
             const items = commandResultsList.querySelectorAll('li:not(.no-results)');
             if (!items.length) return;
 

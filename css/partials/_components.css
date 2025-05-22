@@ -395,3 +395,35 @@ body.dark-mode .color-swatch.selected {
     border-color: var(--primary-accent-color);
     font-weight: bold;
 }
+
+/* Language Switcher Styles */
+.lang-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: var(--navbar-text); /* Use your navbar text color variable */
+    cursor: pointer;
+    padding: 5px 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.lang-btn:hover {
+    color: var(--primary-accent-color); /* Use your primary accent color */
+}
+
+.lang-btn.active { /* Or .active-lang if you prefer */
+    color: var(--primary-accent-color);
+    font-weight: bold;
+}
+
+.lang-separator {
+    color: var(--navbar-text);
+    margin: 0 5px;
+    font-size: 0.9rem;
+}

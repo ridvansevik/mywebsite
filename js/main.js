@@ -1,12 +1,14 @@
 // js/main.js
 import { CLASS_ACTIVE, CLASS_NAVBAR_SCROLLED, SCROLL_THRESHOLD_NAVBAR, NAV_LINK_OFFSET_EXTRA } from './modules/constants.js';
 import { initHamburgerMenu, initSmoothScroll, initScrollToTopButton } from './modules/uiInteractions.js';
-import { initTxtRotate, setupHeroCanvas } from './modules/animations.js';
+// animations.js'den initTxtRotate'i initializeTxtRotateModule olarak ve TxtRotate sınıfını import edin
+import { initTxtRotate as initializeTxtRotateModule, setupHeroCanvas, TxtRotate } from './modules/animations.js';
 import { initThemeManager } from './modules/themeManager.js';
 import { initCommandPalette } from './modules/commandPalette.js';
 import { initSettingsPanel, loadSavedSettings } from './modules/settingsPanel.js';
 import { initProjectFeatures } from './modules/projectFeatures.js';
 import { initContactForm } from './modules/formHandler.js';
+import { initLanguageManager, getTranslation } from './modules/languageManager.js';
 
 // NProgress Page Loading Indicator
 if (typeof NProgress !== 'undefined') {
@@ -22,31 +24,48 @@ if (typeof NProgress !== 'undefined') {
     });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+// Global function for TxtRotate re-initialization
+// SADECE BU VERSİYON KALMALI:
+window.initializeTxtRotateElements = (specificElement = null) => {
+    initializeTxtRotateModule(specificElement); // animations.js'deki güncellenmiş initTxtRotate'i çağırır
+};
+
+// Global refresh functions for modules that need to update their text
+// (Bu fonksiyonların commandPalette.js ve projectFeatures.js içinde tanımlı olduğundan emin olun
+// ve languageManager tarafından çağrıldığında doğru şekilde çalıştıklarını kontrol edin.)
+window.refreshCommandPaletteCommands = () => {
+    if (typeof initCommandPalette === 'function' && window.commandPaletteInitialized) {
+        // Gerekirse initCommandPalette(); çağrılabilir veya commandPalette modülünde özel bir refresh fonksiyonu olabilir.
+        // languageManager.js içindeki setLanguage fonksiyonunda bu tür refresh'ler çağrılıyor.
+    }
+};
+
+window.refreshProjectFeaturesText = () => {
+    if (typeof initProjectFeatures === 'function' && window.projectFeaturesInitialized) {
+        initProjectFeatures();
+    }
+};
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize Language Manager first, it will load and apply initial translations
+    await initLanguageManager(); // Wait for initial language setup (SADECE BİR KEZ ÇAĞIRILMALI)
+
     const navbar = document.querySelector(".navbar");
     const navLinks = document.querySelectorAll(".nav-menu .nav-link");
     const sections = document.querySelectorAll("section[id]");
 
-    // --- Navbar Styling & Active Link Highlighting on Scroll ---
     function handleScrollNavbarAndLinks() {
         if (navbar) {
-            if (window.scrollY > SCROLL_THRESHOLD_NAVBAR) {
-                navbar.classList.add(CLASS_NAVBAR_SCROLLED);
-            } else {
-                navbar.classList.remove(CLASS_NAVBAR_SCROLLED);
-            }
+            navbar.classList.toggle(CLASS_NAVBAR_SCROLLED, window.scrollY > SCROLL_THRESHOLD_NAVBAR);
         }
-
         let scrollY = window.pageYOffset;
         let currentActiveFound = false;
         const navEffectiveOffset = (navbar ? navbar.offsetHeight : 0) + NAV_LINK_OFFSET_EXTRA;
-
         sections.forEach(current => {
             if (!current) return;
             const sectionHeight = current.offsetHeight;
             const sectionTop = current.offsetTop - navEffectiveOffset;
             let sectionId = current.getAttribute("id");
-
             if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
                 navLinks.forEach(link => {
                     link.classList.remove("active-link");
@@ -57,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         });
-
         if (!currentActiveFound && sections.length > 0 && scrollY < (sections[0].offsetTop - navEffectiveOffset)) {
             navLinks.forEach(link => link.classList.remove("active-link"));
             const homeLink = document.querySelector('.nav-link[href="#home"]');
@@ -65,37 +83,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initializations
+    // Initializations of other modules AFTER language is set up
     initHamburgerMenu();
     initSmoothScroll();
-    initScrollToTopButton(handleScrollNavbarAndLinks); // Pass handleScrollNavbarAndLinks if needed inside
+    initScrollToTopButton();
 
     if (document.getElementById('heroCanvas')) {
         setupHeroCanvas();
     }
-    initTxtRotate();
+    
+    // Dil yöneticisi çevirileri uyguladıktan sonra TxtRotate'i başlat
+    window.initializeTxtRotateElements(); 
 
-    initThemeManager(handleScrollNavbarAndLinks); // Pass handleScrollNavbarAndLinks to update navbar on theme change
+    initThemeManager(handleScrollNavbarAndLinks);
     initCommandPalette();
+    window.commandPaletteInitialized = true;
+
     initSettingsPanel();
-    loadSavedSettings(); // Load saved UI settings (theme, font size) from settingsPanel module
+    loadSavedSettings();
 
     initProjectFeatures();
+    window.projectFeaturesInitialized = true;
+
     initContactForm();
 
-    // Footer year
-    const currentYearSpan = document.getElementById('current-year');
-    if (currentYearSpan) {
-        currentYearSpan.textContent = new Date().getFullYear().toString();
-    }
+    handleScrollNavbarAndLinks(); // Initial check
 
-    // Initial state checks
-    handleScrollNavbarAndLinks();
-    // toggleScrollToTopButtonVisibility() is handled by initScrollToTopButton's internal scroll listener
-
-    // Combined Scroll Listener
     window.addEventListener('scroll', () => {
         handleScrollNavbarAndLinks();
-        // Scroll to top visibility is handled within its own module's event listener now
     });
 });
