@@ -131,9 +131,12 @@
   "settingsFontNormal": "Normal",
   "settingsFontLarge": "Büyük",
 
-  "formAlertSuccess": "Teşekkürler, {name}! Mesajınız \"gönderildi\" (konsola kaydedildi).",
+  "formAlertSuccess": "Teşekkürler, {name}! Mesajınız başarıyla gönderildi.",
   "formAlertFillAll": "Lütfen tüm alanları doldurun.",
-
+  "formSending": "Gönderiliyor...",
+  "formAlertError": "Formunuz gönderilirken bir sorun oluştu. Lütfen bilgileri kontrol edip tekrar deneyin.",
+  "formNetworkError": "Mesaj gönderilemedi. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.",
+  
   "ghStatsLoading": "İstatistikler yükleniyor...",
   "ghStatsApiError": "GitHub API hatası! Durum: {status} / Rep: {repoName}",
   "ghStatsCouldNotLoad": "GitHub istatistikleri yüklenemedi.",

@@ -131,9 +131,11 @@
   "settingsFontNormal": "Normal",
   "settingsFontLarge": "Large",
 
-  "formAlertSuccess": "Thank you, {name}! Your message has been \"sent\" (logged to console).",
+  "formAlertSuccess": "Thank you, {name}! Your message has been sent successfully.",
   "formAlertFillAll": "Please fill in all fields.",
-
+  "formSending": "Sending...",
+  "formAlertError": "Oops! There was a problem submitting your form. Please check the details and try again.",
+  "formNetworkError": "Could not send message. Please check your network connection and try again.",
   "ghStatsLoading": "Loading stats...",
   "ghStatsApiError": "GitHub API error! status: {status} for {repoName}",
   "ghStatsCouldNotLoad": "Could not load GitHub stats.",
